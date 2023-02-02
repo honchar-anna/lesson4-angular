@@ -1,0 +1,50 @@
+<div class="book">
+
+<p>My phone book!</p>
+<input type="text"  class="search" placeholder="search test goes here" [(ngModel)]="fied">
+<button class="add" (click)="add()">add phone</button>
+
+<table>
+  <thead>
+<th (click)="sortFirstName()">First name 
+<span *ngIf="hideF" [textContent]="sortF ? '&#11165;' :
+'&#11167;'"></span>
+</th>
+<th (click)="sortLastName()">Last name
+  <span *ngIf="hideL" [textContent]="sortL ? '&#11165;' :
+  '&#11167;'"></span>
+</th>
+<th (click)="  sortPhoneNumber()">Number
+  <span *ngIf="hideN" [textContent]="sortN ? '&#11165;' :
+  '&#11167;'"></span>
+</th>
+<th>Edit</th>
+<th>Delete</th>
+</thead>
+<tbody *ngFor="let user of contacts | sortFirstName: sortF | sortLastName: sortL | sortPhoneNumber:sortN | search:fied;let i=index">
+  <td>{{user.firstName }}</td>
+  <td>{{user.lastName}}</td>
+  <td>{{user.phoneNumber}}</td>
+  <td><button class="edit" (click)="edit(i)">edit</button></td>
+  <td><button class="delete" (click)="delete(i)">delete</button></td>
+</tbody>
+</table>
+</div>
+<div [class]="modal">
+  <div class="formAdd" >
+    <span class="span">Add phone</span><br>
+    <input type="text" placeholder="first name goes here" [(ngModel)]="fName">
+    <input type="text" placeholder="second name goes here"  [(ngModel)]="lName">
+    <input type="text" placeholder="number phone goes here"  [(ngModel)]="nPhone"> <br>
+    <input type="button" value="Save" class="save" (click)="save()">
+  </div>
+</div>
+<div [class]="modalEdit">
+  <div class="formAdd" >
+    <span class="span">Edit phone</span><br>
+    <input type="text" placeholder="first name goes here" [(ngModel)]="fEdit">
+    <input type="text" placeholder="second name goes here"  [(ngModel)]="lEdit">
+    <input type="text" placeholder="number phone goes here"  [(ngModel)]="nEdit"> <br>
+    <input type="button" value="Save" class="save" (click)="saveEdit()">
+  </div>
+</div>
